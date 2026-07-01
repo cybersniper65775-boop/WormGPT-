@@ -30,13 +30,15 @@ export function AIChatInterface() {
       role: 'assistant',
       content: 'Welcome to WormGPT. I can help you code, debug, and build with AI assistance. What would you like to create today?',
       timestamp: new Date(),
-      model: 'WormGPT v4.1',
+      model: 'grok',
     },
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [selectedModel, setSelectedModel] = useState('WormGPT v4.1')
+  const [currentMode, setCurrentMode] = useState(4)
+  const [selectedModel, setSelectedModel] = useState('grok')
   const [hoveredMessageId, setHoveredMessageId] = useState<string | null>(null)
+  const [models] = useState(['grok', 'deepseek', 'mistral', 'gemini', 'cohere'])
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -61,18 +63,33 @@ export function AIChatInterface() {
     setInput('')
     setLoading(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: `I understand you want to "${input}". I can help you with that using ${selectedModel}. Would you like me to generate code, explain concepts, or provide a solution?`,
-        timestamp: new Date(),
-        model: selectedModel,
+    try {
+      const response = await fetch('/api/chat/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: input,
+          mode: currentMode,
+          model: selectedModel,
+        }),
+      })
+
+      const data = await response.json()
+      if (data.success) {
+        const aiResponse: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: data.message,
+          timestamp: new Date(),
+          model: selectedModel,
+        }
+        setMessages((prev) => [...prev, aiResponse])
       }
-      setMessages((prev) => [...prev, aiResponse])
+    } catch (err) {
+      console.error('[v0] Chat error:', err)
+    } finally {
       setLoading(false)
-    }, 1000)
+    }
   }
 
   const copyMessage = (content: string) => {

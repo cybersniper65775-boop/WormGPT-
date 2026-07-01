@@ -36,9 +36,13 @@ export function SimpleSigninForm() {
 
       if (data.success) {
         console.log('[v0] User logged in, redirecting to dashboard')
-        await new Promise(resolve => setTimeout(resolve, 500))
+        // Wait for cookie to be set before redirecting
+        await new Promise(resolve => setTimeout(resolve, 300))
         router.push('/dashboard')
+        // Refresh to ensure middleware processes new session
         router.refresh()
+        // Give router time to complete before returning
+        await new Promise(resolve => setTimeout(resolve, 500))
       }
     } catch (err: any) {
       console.error('[v0] Signin error:', err)

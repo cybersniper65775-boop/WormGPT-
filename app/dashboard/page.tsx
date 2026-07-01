@@ -1,10 +1,53 @@
 'use client'
 
 import Link from 'next/link'
-import { Code, MessageSquare, FileText, Zap, LogOut, Settings } from 'lucide-react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Code, MessageSquare, FileText, Zap, LogOut, Settings, Unlock } from 'lucide-react'
+import { KeyActivation } from '@/components/key-activation'
 import { Terminal } from '@/components/terminal'
 
 export default function DashboardPage() {
+  const router = useRouter()
+  const [activated, setActivated] = useState(false)
+  const [userMode, setUserMode] = useState<number | null>(null)
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' })
+    router.push('/sign-in')
+    router.refresh()
+  }
+
+  if (!activated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <header className="border-b border-slate-700 bg-slate-900/50 backdrop-blur sticky top-0 z-40">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center">
+                <Zap className="text-white" size={24} />
+              </div>
+              <h1 className="text-2xl font-bold text-red-500">WormGPT</h1>
+            </div>
+            <button onClick={handleLogout} className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-red-400 transition-colors">
+              <LogOut size={20} />
+            </button>
+          </div>
+        </header>
+        <main className="max-w-2xl mx-auto px-6 py-12">
+          <div className="mb-8">
+            <h2 className="text-4xl font-bold mb-3 text-slate-50">Activate Your License</h2>
+            <p className="text-xl text-slate-400">Enter your activation key to access WormGPT features</p>
+          </div>
+          <KeyActivation onActivate={(mode) => {
+            setUserMode(mode)
+            setActivated(true)
+          }} />
+        </main>
+      </div>
+    )
+  }
+
   const features = [
     {
       id: 'editor',
@@ -53,14 +96,7 @@ export default function DashboardPage() {
           </div>
 
           <nav className="flex items-center gap-6">
-            <Link href="/dashboard" className="text-slate-300 hover:text-white transition-colors font-semibold">
-              Dashboard
-            </Link>
-            <Link href="/settings" className="text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-2">
-              <Settings size={18} />
-              Settings
-            </Link>
-            <button className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 hover:text-red-400">
+            <button onClick={handleLogout} className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 hover:text-red-400">
               <LogOut size={20} />
             </button>
           </nav>
