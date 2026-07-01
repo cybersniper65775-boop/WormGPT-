@@ -37,7 +37,7 @@ export function SimpleSignupForm() {
       }
 
       // Auto-login user
-      const loginRes = await fetch('/api/auth/login-v2', {
+      const loginRes = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
