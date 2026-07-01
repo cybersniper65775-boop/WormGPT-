@@ -1,5 +1,6 @@
 'use client'
 
+// Version 2.1 - Fixed authentication  
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
