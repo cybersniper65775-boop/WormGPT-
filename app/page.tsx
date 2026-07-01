@@ -15,7 +15,10 @@ export default async function HomePage() {
       {/* Header */}
       <header className="border-b border-red-500/20 bg-black/50 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
-          <div className="text-2xl font-bold text-red-500">WORMGPT</div>
+          <div className="flex items-center gap-3">
+            <img src="/wormgpt-logo.png" alt="WormGPT" className="w-10 h-10 object-contain" />
+            <div className="text-2xl font-bold text-red-500">WORMGPT</div>
+          </div>
           <div className="flex gap-4">
             <Link
               href="/sign-in"
@@ -37,7 +40,7 @@ export default async function HomePage() {
       <section className="max-w-7xl mx-auto px-4 py-20 text-center">
         <div className="mb-8">
           <div className="inline-block p-4 border border-red-500/30 rounded-lg mb-4 animate-pulse">
-            <div className="text-6xl">🧠</div>
+            <img src="/wormgpt-logo.png" alt="WormGPT" className="w-32 h-32 object-contain" />
           </div>
         </div>
 
