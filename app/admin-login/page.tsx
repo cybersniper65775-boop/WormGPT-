@@ -35,9 +35,8 @@ export default function AdminLoginPage() {
       }
 
       if (data.success) {
-        await new Promise(resolve => setTimeout(resolve, 300))
+        setLoading(false)
         router.push('/admin')
-        router.refresh()
       }
     } catch (err: any) {
       setError(err?.message || 'An error occurred')
