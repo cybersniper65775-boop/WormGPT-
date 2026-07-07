@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Key, Users, Zap, TrendingUp, LogOut, Plus } from 'lucide-react'
+import Link from 'next/link'
+import { Key, Users, Zap, TrendingUp, LogOut, Plus, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -43,9 +44,15 @@ export default function AdminDashboard() {
       <header className="border-b border-slate-700 bg-slate-900/50 backdrop-blur sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-red-500">WORMGPT ADMIN</h1>
-          <button onClick={handleLogout} className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-red-400 transition-colors">
-            <LogOut size={20} />
-          </button>
+          <div className="flex items-center gap-4">
+            <Link href="/admin/logs" className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-2">
+              <FileText size={18} />
+              <span className="text-sm">Audit Logs</span>
+            </Link>
+            <button onClick={handleLogout} className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-red-400 transition-colors">
+              <LogOut size={20} />
+            </button>
+          </div>
         </div>
       </header>
 
