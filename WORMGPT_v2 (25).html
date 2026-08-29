@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WORMGPT — Cyber AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/atom-one-dark.min.css"/>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
+
+<link rel="stylesheet" href="worm.css"/>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<!-- ═══ LANDING PAGE ═══ -->
+<div class="auth-screen" id="landingPage">
+  <div class="auth-card" style="max-width:580px">
+    <div class="auth-icon">🦈</div>
+    <div class="auth-logo logo" style="font-size:3rem">WORMGPT</div>
+    <p class="auth-sub" style="font-size:.82rem;margin-bottom:1.5rem">&gt; the AI that doesn't hold back_</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.5rem;text-align:left">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.65rem .8rem">
+        <div style="font-size:1rem;margin-bottom:.2rem">🧠</div>
+        <div style="font-size:.72rem;color:var(--accent);font-weight:600;font-family:'Orbitron',sans-serif">9 AI MODELS</div>
+        <div style="font-size:.65rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">Claude · Gemini · Llama & more</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.65rem .8rem">
+        <div style="font-size:1rem;margin-bottom:.2rem">🌐</div>
+        <div style="font-size:.72rem;color:var(--accent);font-weight:600;font-family:'Orbitron',sans-serif">WEB SEARCH</div>
+        <div style="font-size:.65rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">Real-time web research</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.65rem .8rem">
+        <div style="font-size:1rem;margin-bottom:.2rem">📋</div>
+        <div style="font-size:.72rem;color:var(--accent);font-weight:600;font-family:'Orbitron',sans-serif">CODE BLOCKS</div>
+        <div style="font-size:.65rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">Syntax highlight + copy</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.65rem .8rem">
+        <div style="font-size:1rem;margin-bottom:.2rem">⚡</div>
+        <div style="font-size:.72rem;color:var(--accent);font-weight:600;font-family:'Orbitron',sans-serif">NO LIMITS</div>
+        <div style="font-size:.65rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:.15rem">Edgy · direct · unrestricted</div>
+      </div>
+    </div>
+    <button class="auth-submit logo" onclick="document.getElementById('landingPage').style.display='none';document.getElementById('loginScreen').style.display='flex'" style="margin-bottom:.6rem">LOGIN →</button>
+    <button class="auth-submit logo" onclick="document.getElementById('landingPage').style.display='none';document.getElementById('signupScreen').style.display='flex'" style="background:var(--bg2);color:var(--accent);box-shadow:none;border:1px solid var(--accent)">CREATE ACCOUNT →</button>
+    <div style="margin-top:1rem;font-size:.68rem;color:var(--muted);font-family:'JetBrains Mono',monospace">by CYBER SNIPER · <a href="https://t.me/Broker_Tech1" target="_blank" style="color:var(--accent)">Telegram</a></div>
+  </div>
+</div>
+
+<div class="auth-screen" id="loginScreen" style="display:none">
+  <div class="auth-card">
+    <div class="auth-icon">🦈</div>
+    <div class="auth-logo logo">WORMGPT</div>
+    <p class="auth-sub">&gt; authenticate to continue_</p>
+    <div class="auth-error" id="loginError"></div>
+    <input class="auth-input" id="loginEmail" type="email" placeholder="email@address.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <div class="auth-input-wrap">
+      <input class="auth-input" id="loginPass" type="password" placeholder="password" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="pass-toggle" onclick="togglePass('loginPass',this)" type="button">👁</button>
+    </div>
+    <button class="auth-submit logo" id="loginBtn" onclick="doLogin()">ACCESS →</button>
+    <div class="auth-switch">No account? <a onclick="showSignup()">Create one</a></div>
+  </div>
+</div>
+
+<!-- rest of HTML unchanged... -->
+
+<!-- load user config (create config.js from config.example.js and keep private) -->
+<script src="config.js"></script>
+<script src="worm.js"></script>
+</body></html>

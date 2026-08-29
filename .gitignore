@@ -1,0 +1,6 @@
+# Ignore local config with secrets
+config.js
+
+# Optional
+.env
+node_modules/
